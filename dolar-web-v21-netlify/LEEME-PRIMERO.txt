@@ -1,0 +1,8 @@
+DÓLAR WEB v19 — VERSIÓN DEFINITIVA
+
+Abrí ESTE archivo para usar la aplicación:
+index.html
+
+No abras una versión anterior (v17/v18/v14). Todo lo necesario está dentro de esta misma carpeta.
+
+Para editar visualmente: editor.html

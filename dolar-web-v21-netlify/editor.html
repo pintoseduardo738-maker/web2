@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editor visual · Dólar Web</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body class="editor-body">
+  <header class="editor-topbar">
+    <div class="editor-brand"><span class="editor-mark">$</span><div><strong>Editor visual · Dólar Web</strong><small>Seleccioná cualquier elemento y personalizalo</small></div></div>
+    <div class="editor-actions">
+      <label class="designer-toggle"><input id="directEditToggle" type="checkbox" checked><span></span> Modo diseñador</label>
+      <a class="editor-secondary" href="index.html">↗ Ver sitio</a>
+      <button class="editor-secondary" id="resetBtn">Restaurar</button>
+      <button class="editor-primary" id="applyBtn">Guardar todo</button>
+    </div>
+  </header>
+
+  <main class="builder builder-pro">
+    <aside class="builder-panel">
+      <div class="panel-note"><strong>Todo editable</strong><span>Hacé clic para seleccionar un elemento y arrastralo para moverlo. Después ajustá texto, colores y estilos desde este panel. Los cambios se guardan en este navegador.</span></div>
+
+      <section class="builder-section">
+        <h2>Elemento seleccionado</h2>
+        <div class="selected-box" id="selectedInfo">Ningún elemento seleccionado. Hacé clic y arrastrá en la vista previa para moverlo.</div>
+        <label>Texto / contenido<textarea id="elementText" rows="4" placeholder="Seleccioná un elemento..."></textarea></label>
+        <div class="form-grid-2 editor-grid">
+          <label>Valor<input id="elementValue" type="text"></label>
+          <label>Placeholder<input id="elementPlaceholder" type="text"></label>
+        </div>
+        <label>Enlace / URL<input id="elementHref" type="text" placeholder="https://..."></label>
+        <div class="inspector-actions"><button class="editor-secondary" id="inlineEditBtn">Editar dentro de la página</button><button class="editor-danger" id="hideElementBtn">Ocultar</button></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Apariencia</h2>
+        <div class="color-row editor-grid">
+          <label>Color texto<input id="styleColor" type="color"></label>
+          <label>Fondo<input id="styleBackground" type="color"></label>
+        </div>
+        <div class="form-grid-2 editor-grid">
+          <label>Tamaño<input id="styleFontSize" type="number" min="8" max="96" step="1"><span class="field-help">px</span></label>
+          <label>Opacidad<input id="styleOpacity" type="number" min="0" max="1" step="0.05"></label>
+        </div>
+        <div class="form-grid-2 editor-grid">
+          <label>Peso<select id="styleWeight"><option value="">Automático</option><option value="400">Normal</option><option value="500">Medio</option><option value="600">Seminegrita</option><option value="700">Negrita</option><option value="800">Extra</option></select></label>
+          <label>Alineación<select id="styleAlign"><option value="">Automática</option><option>left</option><option>center</option><option>right</option><option>justify</option></select></label>
+        </div>
+        <div class="form-grid-2 editor-grid">
+          <label>Radio<input id="styleRadius" type="number" min="0" max="60"><span class="field-help">px</span></label>
+          <label>Ancho<input id="styleWidth" type="text" placeholder="auto / 100% / 320px"></label>
+        </div>
+        <div class="form-grid-2 editor-grid">
+          <label>Alto<input id="styleHeight" type="text" placeholder="auto / 200px"></label>
+          <label>Espaciado<input id="stylePadding" type="text" placeholder="12px"></label>
+        </div>
+        <label>Margen<input id="styleMargin" type="text" placeholder="12px 0"></label>
+        <div class="inspector-actions"><button class="editor-secondary" id="clearStylesBtn">Quitar estilos personalizados</button></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Lista de elementos</h2>
+        <p class="field-help">Podés seleccionar cualquier elemento desde esta lista cuando esté difícil de encontrar en la vista previa.</p>
+        <input id="elementSearch" class="search-input" type="search" placeholder="Buscar por texto, etiqueta o clase…">
+        <div id="elementList" class="element-list"></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Cuenta y dueño</h2>
+        <p class="field-help">Estos campos cambian los datos reales que usa la interfaz: saludo, perfil y titular de las tarjetas. No hace falta editar el código.</p>
+        <label>Nombre del dueño / titular<input id="accountName" type="text" placeholder="Nombre y apellido"></label>
+        <label>DNI<input id="accountDni" type="text" placeholder="12.345.678"></label>
+        <label>Correo electrónico<input id="accountEmail" type="email" placeholder="correo@ejemplo.com"></label>
+        <label>Teléfono<input id="accountPhone" type="tel" placeholder="381 555 0148"></label>
+        <div class="form-grid-2 editor-grid"><label>Alias<input id="accountAlias" type="text" placeholder="JUAN.CALDERON"></label><label>CUIT<input id="accountCuit" type="text" placeholder="20-32456781-7"></label></div>
+        <label>CBU<input id="accountCbu" type="text" placeholder="0000003100001234567890"></label>
+        <label>CVU<input id="accountCvu" type="text" placeholder="0000003100009876543210"></label>
+        <label>Entidad receptora<input id="accountBank" type="text" placeholder="Dólar Web"></label>
+        <label>Nueva contraseña<input id="accountPassword" type="password" placeholder="••••••••"></label>
+        <div class="inspector-actions"><button class="editor-secondary" id="saveAccountBtn">Guardar datos de cuenta</button></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Saldos y dinero</h2>
+        <label>Saldo en pesos<input id="editorBalanceARS" type="number" min="0" step="0.01"></label>
+        <label>Saldo en dólares<input id="editorBalanceUSD" type="number" min="0" step="0.01"></label>
+        <label>Saldo para gastar con tarjeta<input id="editorCardSpend" type="number" min="0" step="0.01"></label>
+        <label>Tasa de ahorro (TNA %)<input id="editorSavingsRate" type="number" min="0" step="0.01"></label><label>Regalía en conversiones (%)<input id="editorConversionFee" type="number" min="0" step="0.01"></label><label>Regalía en transferencias externas (%)<input id="editorExternalFee" type="number" min="0" step="0.01"></label>
+        <div class="inspector-actions"><button class="editor-secondary" id="saveFinanceBtn">Guardar valores</button></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Tarjetas virtuales</h2>
+        <label>Nombre tarjeta local<input id="cardLocalName" type="text"></label>
+        <label>Descripción tarjeta local<input id="cardLocalSubtitle" type="text"></label>
+        <label>Número visible (enmascarado)<input id="cardLocalNumber" type="text"></label>
+        <label>Número completo<input id="cardLocalFullNumber" type="text"></label>
+        <div class="form-grid-2 editor-grid"><label>Vencimiento<input id="cardLocalExpiry" type="text"></label><label>CVV<input id="cardLocalCvv" type="text"></label></div>
+        <hr class="editor-separator">
+        <label>Nombre tarjeta global<input id="cardGlobalName" type="text"></label>
+        <label>Descripción tarjeta global<input id="cardGlobalSubtitle" type="text"></label>
+        <label>Número visible (enmascarado)<input id="cardGlobalNumber" type="text"></label>
+        <label>Número completo<input id="cardGlobalFullNumber" type="text"></label>
+        <div class="form-grid-2 editor-grid"><label>Vencimiento<input id="cardGlobalExpiry" type="text"></label><label>CVV<input id="cardGlobalCvv" type="text"></label></div>
+        <div class="inspector-actions"><button class="editor-secondary" id="saveCardsBtn">Guardar tarjetas</button></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Configuración del sitio</h2>
+        <label>Nombre de la página<input id="appName" type="text"></label>
+        <label>Frase debajo del nombre<input id="tagline" type="text"></label>
+        <label>Color principal<input id="primaryColor" type="color"></label>
+        <label>Fondo general<input id="backgroundColor" type="color"></label>
+        <div class="checks" id="quoteChecks"></div>
+      </section>
+
+      <section class="builder-section">
+        <h2>Secciones</h2>
+        <label class="toggle-row"><span>Mostrar Ahorro</span><input id="showSavings" type="checkbox"><i></i></label>
+        <label class="toggle-row"><span>Mostrar Inversión</span><input id="showInvestment" type="checkbox"><i></i></label>
+        <label class="toggle-row"><span>Mostrar Actividad</span><input id="showActivity" type="checkbox"><i></i></label>
+      </section>
+
+      <section class="builder-section builder-danger-section">
+        <h2>Mantenimiento de datos</h2>
+        <p class="field-help">Estas acciones son exclusivas del editor externo. No aparecen dentro de Dólar Web para los usuarios.</p>
+        <div class="maintenance-actions">
+          <button class="editor-danger" id="clearInvestmentHistoryEditor">Borrar historial de compras</button>
+          <button class="editor-danger" id="clearActivityHistoryEditor">Borrar historial de movimientos</button>
+          <button class="editor-danger" id="clearJarsEditor">Borrar todos los frascos</button>
+          <button class="editor-danger" id="resetCreditCardsEditor">Resetear tarjetas de crédito</button>
+          <button class="editor-danger" id="clearAllHistoryEditor">Borrar todo el historial</button>
+        </div>
+        <div class="save-status maintenance-status" id="maintenanceStatus">No se modificaron los historiales.</div>
+      </section>
+
+      <section class="builder-section compact-editor-section">
+        <h2>Guardar / transportar</h2>
+        <div class="save-row"><button class="editor-secondary" id="exportBtn">Exportar todo</button><label class="import-btn">Importar todo<input id="importFile" type="file" accept="application/json"></label></div>
+        <div class="save-status" id="saveStatus">Sin cambios pendientes.</div>
+      </section>
+    </aside>
+
+    <section class="preview-area">
+      <div class="preview-toolbar"><span><i class="device-dot"></i> Vista previa editable</span><span class="preview-tip">Clic = seleccionar · doble clic = editar texto · Guardar todo = conservar cambios</span></div>
+      <div class="preview-frame-wrap"><iframe id="previewFrame" src="index.html?preview=1&editor=1" title="Vista previa editable de Dólar Web"></iframe></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/editor.js"></script>
+</body>
+</html>
